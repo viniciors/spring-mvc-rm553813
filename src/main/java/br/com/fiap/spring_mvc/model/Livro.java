@@ -2,10 +2,13 @@ package br.com.fiap.spring_mvc.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "tb_livro")
 @Data
+
 public class Livro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,4 +20,5 @@ public class Livro {
     @Column(name = "categoria")
     @Enumerated(EnumType.STRING)
     private Categoria categoria;
+
 }
