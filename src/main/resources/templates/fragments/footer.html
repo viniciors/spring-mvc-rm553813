@@ -2,13 +2,26 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Library Footer</title>
 </head>
 <body>
-    <div th:fragment="footer">
-        <hr />
-        <h2>Exemplo de rodapé</h2>
-    </div>
+
+<div th:fragment="footer">
+    <hr />
+    <footer style="text-align: center; padding: 20px; background-color: #f8f9fa;">
+        <p>&copy; 2024 Biblioteca Online. Todos os direitos reservados.</p>
+        <p>
+            <a href="/about">Sobre nós</a> |
+            <a href="/contact">Contato</a> |
+            <a href="/privacy">Política de Privacidade</a>
+        </p>
+        <p>Siga-nos:
+            <a href="https://facebook.com" target="_blank">Facebook</a> |
+            <a href="https://twitter.com" target="_blank">Twitter</a> |
+            <a href="https://instagram.com" target="_blank">Instagram</a>
+        </p>
+    </footer>
+</div>
 
 </body>
 </html>

@@ -3,40 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista de Livros</title>
+    <link th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" rel="stylesheet"/>
+    <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}" defer></script>
 </head>
 <body>
-    <div th:replace="~{fragments/header :: header}"></div>
-    <div>
-        <h2>Lista de livros cadastrados</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Título</th>
-                    <th>Autor</th>
-                    <th>Categoria</th>
-                    <th>Preço</th>
-                    <th>ISBN</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="livro : ${listaLivros}">
-                    <td th:text="${livro.id}">ID</td>
-                    <td th:text="${livro.titulo}">Título</td>
-                    <td th:text="${livro.autor}">Autor</td>
-                    <td th:text="${livro.categoria}">Categoria</td>
-                    <td th:text="${livro.preco}">Preço</td>
-                    <td th:text="${livro.isbn}">ISBN</td>
-                    <td>
-                        <a th:href="@{/livro/edicao/{id}(id = ${livro.id})}">Editar</a>
-                        <span> | </span>
-                        <a th:href="@{/livro/deletar/{id}(id = ${livro.id})}">Deletar</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class="container mt-4">
+    <h2>Lista de livros cadastrados</h2>
+    <table class="table table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="livro : ${listaLivros}">
+            <td th:text="${livro.id}"></td>
+            <td th:text="${livro.titulo}"></td>
+            <td>
+                <!-- Botão para abrir o modal -->
+                <button class="btn btn-primary" data-bs-toggle="modal" th:attr="data-bs-target='#modal' + ${livro.id}">
+                    Detalhes
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:each="livro : ${listaLivros}" th:id="|modal${livro.id}|" class="modal fade" tabindex="-1"
+         data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Detalhes do Livro</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>ID:</strong> <span th:text="${livro.id}"></span></p>
+                    <p><strong>Título:</strong> <span th:text="${livro.titulo}"></span></p>
+                    <p><strong>Autor:</strong> <span th:text="${livro.autor}"></span></p>
+                    <p><strong>Categoria:</strong> <span th:text="${livro.categoria.descricao}"></span></p>
+                    <p><strong>Preço:</strong> <span th:text="${livro.preco}"></span></p>
+                    <p><strong>ISBN:</strong> <span th:text="${livro.isbn}"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-warning" th:href="@{/livro/edicao/{id}(id = ${livro.id})}">Editar</a>
+                    <a class="btn btn-danger" th:href="@{/livro/deletar/{id}(id = ${livro.id})}">Deletar</a>
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>
