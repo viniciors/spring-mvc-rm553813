@@ -5,10 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-    <div th:fragment="header">
-        <h1>Exemplo de cabeçalho</h1>
-        <hr />
-    </div>
-
+<div th:fragment="header">
+    <h1>Biblioteca Virtual</h1>
+    <a th:href="@{/livro/cadastro}">Cadastrar Livro</a>
+    <span> | </span>
+    <a th:href="@{/livro/lista}">Lista de Livros</a>
+    <hr />
+</div>
 </body>
 </html>
